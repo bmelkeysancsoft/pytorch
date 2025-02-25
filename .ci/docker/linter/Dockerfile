@@ -15,6 +15,7 @@ COPY ./common/install_user.sh install_user.sh
 RUN bash ./install_user.sh && rm install_user.sh
 
 # Install conda and other packages (e.g., numpy, pytest)
+ARG ANACONDA_PYTHON_VERSION
 ENV PYTHON_VERSION=$ANACONDA_PYTHON_VERSION
 COPY requirements-ci.txt /opt/requirements-ci.txt
 COPY ./common/install_python.sh install_python.sh
