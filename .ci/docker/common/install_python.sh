@@ -3,6 +3,8 @@ set -ex
 
 apt-get update
 apt-get install -y python${PYTHON_VERSION} python${PYTHON_VERSION}-dev python3-pip
+ln -s /usr/bin/python3 /usr/bin/python
+ln -s /usr/bin/pip3 /usr/bin/pip
 python --version
 python3 --version
 pip3 --version
