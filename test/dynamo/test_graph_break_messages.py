@@ -628,7 +628,7 @@ Graph break under GenericContextWrappingVariable
   Hint: Move the offending context manager(s) to outside the compiled region.
   Hint: This graph break may have been caused by an earlier graph break. Resolving the earlier graph break may resolve this one.
 
-  Developer debug context:
+  Developer debug context: Active generic context managers: [GenericContextWrappingVariable(CtxMgr), GenericContextWrappingVariable(CtxMgr)]
 
 
 from user code:
@@ -676,7 +676,7 @@ Missing bytecode handler
 
 from user code:
    File "test_graph_break_messages.py", line N, in fn
-    s = re.sub(""",
+    class Foo:""",
             post_munge=post_munge,
         )
 
@@ -706,7 +706,7 @@ Reconstruction failure
 
 from user code:
    File "test_graph_break_messages.py", line N, in fn
-    lambda: torch.compile(fn, backend="eager", fullgraph=True)(),""",
+    return Foo().meth""",
             post_munge=post_munge,
         )
 
