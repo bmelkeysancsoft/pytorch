@@ -9,4 +9,4 @@ python3 --version
 pip3 --version
 pip --version
 python3 -mpip install --upgrade pip
-python3 -mpip install -r requirements-ci.txt
+python3 -mpip install -r /opt/requirements-ci.txt
