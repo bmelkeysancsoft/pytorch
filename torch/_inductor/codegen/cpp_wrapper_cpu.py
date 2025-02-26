@@ -308,6 +308,14 @@ class CppWrapperCpu(PythonWrapperCodegen):
         # real input/output tensor match ones provided at compile time via sample
         # input/output.
         def gen_check(handle_kind, idx, name, tensor):
+            self.prefix.splice(
+                """
+                const char* env_var_value = getenv("AOTI_RUNTIME_CHECK_INPUTS");
+                if (env_var_value == nullptr or env_var_value[0] == '\0'){
+                    return;
+                }
+                """
+            )
             # Wrap AtenTensorHandle with ConstantHandle for cleaner utility function access
             self.prefix.writeline(
                 f"ConstantHandle {name} = ConstantHandle({handle_kind}[{idx}]);"
@@ -457,11 +465,10 @@ class CppWrapperCpu(PythonWrapperCodegen):
                     ) {
                     """
 
-                if config.aot_inductor.debug_compile:
-                    self.generate_input_output_runtime_checks()
-                    run_impl_proto += """
-                        __check_inputs_outputs(input_handles, output_handles);
-                    """
+                self.generate_input_output_runtime_checks()
+                run_impl_proto += """
+                    __check_inputs_outputs(input_handles, output_handles);
+                """
 
                 self.prefix.splice(run_impl_proto)
         else:
