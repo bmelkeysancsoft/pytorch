@@ -11,8 +11,8 @@ python3 --version
 pip3 --version
 pip --version
 python -mpip install --upgrade pip
+pip --version
+pip3 --version
 python -mpip install -r /opt/requirements-ci.txt
-ls -la /usr/bin/python3.9/bin
-ln -s /usr/bin/python3.9/bin/pip3 /usr/bin/pip
 
 pip --version
